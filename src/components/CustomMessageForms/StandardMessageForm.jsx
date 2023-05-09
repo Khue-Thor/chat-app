@@ -1,13 +1,19 @@
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { PaperClipIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
+import { Dropdown } from "react-chat-engine-advanced";
+import Dropzone from "react-dropzone";
 
 const StandardMessageForm = () => {
   const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState("");
   const [preview, setPreview] = useState("");
 
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+
   return (
-    <div>
+    <div className="message-form-container">
       {preview && (
         <div className="message-form-preview">
           <img
@@ -16,12 +22,44 @@ const StandardMessageForm = () => {
             src={preview}
             onLoad={() => URL.revokeObjectURL(preview)}
           />
-          <XMarkIcon className="message-form-icon-x" onClick={() => {
-            setPreview("");
-            setAttachment("");
-          }}/>
+          <XMarkIcon
+            className="message-form-icon-x"
+            onClick={() => {
+              setPreview("");
+              setAttachment("");
+            }}
+          />
         </div>
       )}
+      <div className="message-form">
+        <div className="message-form-input-container">
+          <input
+            className="message-form-input"
+            type="text"
+            value={message}
+            onChange={handleChange}
+            placeholder="Send a message..."
+          />
+        </div>
+        <div className="message-form-icons">
+          <Dropzone
+            acceptFiles=".jpg,.jpeg,.png"
+            multiple={false}
+            noClick={true}
+            onDrop={(acceptedFiles) => {
+              setAttachment(acceptedFiles[0]);
+              setPreview(URL.createObjectURL());
+            }}
+          >
+            {({ getRootProps, getInputProps, open }) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <PaperClipIcon className="message-form-icon-clip" onClick={open} />
+              </div>
+            )}
+          </Dropzone>
+        </div>
+      </div>
     </div>
   );
 };
