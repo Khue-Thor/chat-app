@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Chat from '@/components/Chat/Chat';
 
 function App() {
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -10,8 +11,10 @@ function App() {
           <Route path="/chat" element={<Chat />} />
         </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }
 
 export default App;
+

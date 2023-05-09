@@ -5,7 +5,7 @@ import StandardMessageForm from "../CustomMessageForms/StandardMessageForm";
 
 const Chat = () => {
   const chatProps = useMultiChatLogic(
-    import.meta.env.VITE_PROJECT_ID,
+    import.meta.env.VITE_PROJECT_ID, // project-id
     "testuser", // user
     "1234" // password
   );
