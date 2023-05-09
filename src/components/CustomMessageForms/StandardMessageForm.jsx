@@ -1,6 +1,5 @@
 import { PaperClipIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
-import { Dropdown } from "react-chat-engine-advanced";
 import Dropzone from "react-dropzone";
 
 const StandardMessageForm = () => {
@@ -48,7 +47,7 @@ const StandardMessageForm = () => {
             noClick={true}
             onDrop={(acceptedFiles) => {
               setAttachment(acceptedFiles[0]);
-              setPreview(URL.createObjectURL());
+              setPreview(URL.createObjectURL(acceptedFiles[0]));
             }}
           >
             {({ getRootProps, getInputProps, open }) => (
